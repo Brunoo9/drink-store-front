@@ -9,6 +9,7 @@ import WebWhiskies from "../pages/Web/drinkPages/espirituosas/WebWhiskies";
 import WebAperitivos from "../pages/Web/drinkPages/espirituosas/WebAperitivos";
 import WebNegra from "../pages/Web/drinkPages/Cervezas/WebNegra";
 import WebVinos from "../pages/Web/drinkPages/vinos/WebVinos";
+import WebVinosTinto from "../pages/Web/drinkPages/vinos/WebVinosTinto";
 import WebGin from "../pages/Web/drinkPages/espirituosas/WebGin";
 import WebLicores from "../pages/Web/drinkPages/espirituosas/WebLicores";
 import WebVodka from "../pages/Web/drinkPages/espirituosas/WebVodka";
@@ -25,6 +26,8 @@ import AdminUsers from "../pages/Admin/AdminUsers";
 import AdminClients from "../pages/Admin/AdminClients";
 import WebRubia from "../pages/Web/drinkPages/Cervezas/WebRubia";
 import WebRoja from "../pages/Web/drinkPages/Cervezas/WebRoja";
+import WebVinosBlacno from "../pages/Web/drinkPages/vinos/WebVinosBlacno";
+import WebVinosEspumoso from "../pages/Web/drinkPages/vinos/WebVinosEspumoso";
 
 const WebRoutes = () => {
   return (
@@ -51,6 +54,9 @@ const WebRoutes = () => {
         <Route path="productos/cervezas/negra" element={<WebNegra />} />
         <Route path="productos/cervezas/roja" element={<WebRoja />} />
         <Route path="productos/vinos" element={<WebVinos />} />
+        <Route path="productos/vinos/tinto" element={<WebVinosTinto />} />
+        <Route path="productos/vinos/blanco" element={<WebVinosBlacno />} />
+        <Route path="productos/vinos/espumoso" element={<WebVinosEspumoso />} />
         <Route path="productos/combos" element={<WebCombos />} />
         <Route
           path="productos/combos/cervezas"
