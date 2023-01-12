@@ -1,0 +1,35 @@
+
+  
+  .site-layout .site-layout-background {
+    background: #fff;
+  }
+
+/*
+    -----------WEB LAYOUT START--------
+*/
+
+.botones{
+  display: flex;
+  margin-right:0.5rem ;
+  gap: 1.5rem;
+}
+
+.iconos{
+  display: flex;
+  color: #fff;
+  align-items: center;
+  gap: .5rem;
+}
+
+.nav-iconos{
+  display: flex;
+  gap: 1rem;
+  font-size: larger;
+}
+
+
+/*
+  -----------ADMIN LAYOUT FINISH--------
+*/
+
+

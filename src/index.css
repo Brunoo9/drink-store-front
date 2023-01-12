@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*because the tailwindcss modify the all styles  */
+.ant-message-custom-content{
+    display: flex ;
+    justify-content: center ;
+    align-items: center ;
+}
+/* .ant-btn{
+    color: #fff;
+    border: 1px solid #ef4444;
+}
+.ant-btn:hover{
+    border-color: transparent;
+} */
+.ant-btn:disabled,.ant-btn:disabled:hover,.ant-btn:disabled:focus{
+    background-color: transparent;
+    color: #6b7280;
+    border-color: #6b7280;
+}
