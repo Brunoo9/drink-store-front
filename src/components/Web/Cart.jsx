@@ -3,7 +3,7 @@ import { Button, Drawer, message } from "antd";
 import useCarrito from "../../Hooks/useCarrito";
 
 const Cart = ({ openCarrito, setOpenCarrito }) => {
-  const { clearCart, cartItems } = useCarrito();
+  const { clearCart, cartItems, subTotal } = useCarrito();
 
   const onClose = () => {
     setOpenCarrito(false);
@@ -22,21 +22,14 @@ const Cart = ({ openCarrito, setOpenCarrito }) => {
       drawerStyle={{ backgroundColor: "#262626" }}
       bodyStyle={{ color: "#fff" }}
       footer={
-        <div className="div-carrito">
-          <div className="div-carrito-parrafos">
+        <div className="font-bold text-white flex flex-col gap-4">
+          <div className=" flex gap-2 items-center justify-around text-lg">
             <p>SUBTOTAL: </p>
-            <p>$20000</p>
+            <p className="text-red-500">{subTotal}</p>
           </div>
-          <div className="div-carrito-botones">
+          <div className="flex  items-center justify-center">
             <Button
-              className="flex items-center text-white border-red-500 hover:border-red-500 hover:text-white hover:bg-red-500 focus:bg-transparent focus:text-white focus:border-red-500"
-              disabled={cartItems.length > 0 ? false : true}
-              onClick={handleClick}
-            >
-              Vaciar Carrito
-            </Button>
-            <Button
-              className="flex items-center text-white border-red-500 hover:border-red-500 hover:text-white hover:bg-red-500 focus:bg-transparent focus:text-white focus:border-red-500"
+              className="uppercase  font-bold flex items-center justify-center w-full text-white border-red-500 hover:border-red-500 hover:text-white hover:bg-red-500 focus:bg-transparent focus:text-white focus:border-red-500"
               onClick={() => {
                 message.info("Proximamente");
               }}
@@ -45,6 +38,15 @@ const Cart = ({ openCarrito, setOpenCarrito }) => {
             </Button>
           </div>
         </div>
+      }
+      extra={
+        <Button
+          className="flex items-center justify-center text-white border-red-500 hover:border-red-500 hover:text-white hover:bg-red-500 focus:bg-transparent focus:text-white focus:border-red-500 w-full"
+          disabled={cartItems.length > 0 ? false : true}
+          onClick={handleClick}
+        >
+          Vaciar Carrito
+        </Button>
       }
     >
       <ArticuloCarrito />

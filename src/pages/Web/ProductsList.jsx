@@ -1,7 +1,7 @@
 import { Col, Row, Button, Image, message } from "antd";
-import { useState } from "react";
 import { ShoppingCartOutlined, EyeOutlined } from "@ant-design/icons";
 import useCarrito from "../../Hooks/useCarrito";
+
 const ProductsList = ({ products }) => {
   const { addItemToCart } = useCarrito();
 
@@ -13,7 +13,7 @@ const ProductsList = ({ products }) => {
     <Row gutter={[12, 26]} justify="center" className="xs:px-4 sm:px-10 py-2">
       {products.map((product) => (
         <Col xs={16} sm={12} md={8} lg={8} xl={6} key={product?.idproducto}>
-          <div className="flex flex-col shadow-xl hover:shadow-red-600 transition-shadow duration-300 hover:cursor-pointer border-b-4 border-red-500 ">
+          <div className="flex flex-col shadow-xl hover:shadow-gray-600 transition-shadow duration-300 hover:cursor-pointer border-b-4 border-red-500 ">
             <div className="bg-white">
               <Image
                 src={product?.img1}
