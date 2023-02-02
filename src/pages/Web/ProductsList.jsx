@@ -34,13 +34,13 @@ const ProductsList = ({ products }) => {
 
               <div className="flex justify-center items-center gap-x-3 h-full">
                 <Button
-                  className="flex p-2 h-full border-none items-center justify-center rounded-sm hover:bg-transparent hover:text-red-500  focus:bg-transparent focus:text-red-500 w-full transition duration-800"
+                  className=" p-2 h-full border-none  rounded-sm hover:bg-transparent hover:text-red-500  focus:bg-transparent focus:text-red-500 w-full transition duration-800"
                   icon={<EyeOutlined />}
                 >
                   Ver
                 </Button>
                 <Button
-                  className="flex p-2 h-full border-none items-center justify-center rounded-sm hover:bg-transparent hover:text-red-500  focus:bg-transparent focus:text-red-500 w-full transition duration-800"
+                  className=" p-2 h-full border-none  rounded-sm hover:bg-transparent hover:text-red-500  focus:bg-transparent focus:text-red-500 w-full transition duration-800"
                   icon={<ShoppingCartOutlined />}
                   onClick={(e) => handleButton(e, product)}
                 >

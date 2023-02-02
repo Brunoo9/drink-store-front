@@ -36,7 +36,7 @@ const MasterProductsPage = ({ filters, products, title }) => {
             <div className="flex items-center">
               <Button
                 icon={<FilterFilled />}
-                className="xl:hidden mb-4 focus:bg-red-500 focus:text-white self-start flex items-center border-none hover:bg-transparent hover:text-red-500"
+                className="xl:hidden mb-4 focus:bg-red-500 focus:text-white self-start  border-none hover:bg-transparent hover:text-red-500"
                 onClick={onClickFilter}
               >
                 Filtrar

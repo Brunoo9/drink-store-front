@@ -1,9 +1,10 @@
 import React from "react";
-import { Breadcrumb, Layout, Menu } from "antd";
+import { Layout, Menu, Image } from "antd";
 import { useState } from "react";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
-
+import Logo from "../../assets/logo.png";
+import "./adminComponent.css";
 const MenuSider = () => {
   const { Sider } = Layout;
   const [collapsed, setCollapsed] = useState(false);
@@ -40,26 +41,33 @@ const MenuSider = () => {
       ),
     ]),
     getItem(
-      <Link className="itemSider" to="ordenes">
-        Ordenes
+      <Link className="itemSider" to="/">
+        Cerrar Sesión
       </Link>,
       "5",
-      <Icon icon="icon-park-outline:transaction-order" />
+      <Icon icon="mdi:power-standby" />
     ),
-    getItem(
-      <Link className="itemSider" to="usuarios">
-        Usuarios
-      </Link>,
-      "6",
-      <Icon icon="eos-icons:admin-outlined" />
-    ),
-    getItem(
-      <Link className="itemSider" to="clientes">
-        Clientes
-      </Link>,
-      "7",
-      <Icon icon="clarity:users-line" />
-    ),
+    // getItem(
+    //   <Link className="itemSider" to="ordenes">
+    //     Ordenes
+    //   </Link>,
+    //   "5",
+    //   <Icon icon="icon-park-outline:transaction-order" />
+    // ),
+    // getItem(
+    //   <Link className="itemSider" to="usuarios">
+    //     Usuarios
+    //   </Link>,
+    //   "6",
+    //   <Icon icon="eos-icons:admin-outlined" />
+    // ),
+    // getItem(
+    //   <Link className="itemSider" to="clientes">
+    //     Clientes
+    //   </Link>,
+    //   "7",
+    //   <Icon icon="clarity:users-line" />
+    // ),
   ];
 
   return (
@@ -67,9 +75,11 @@ const MenuSider = () => {
       collapsible
       collapsed={collapsed}
       onCollapse={(value) => setCollapsed(value)}
-      style={{ backgroundColor: "#1E293B" }}
+      className="bg-black"
     >
-      <div className="logo" />
+      <div className="flex justify-center">
+        <Image src={Logo} alt="logo drink store" preview={false} height={80} />
+      </div>
       <Menu
         theme="dark"
         defaultSelectedKeys={["1"]}

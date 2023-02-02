@@ -19,4 +19,13 @@
     background-color: transparent;
     color: #6b7280;
     border-color: #6b7280;
+
 }
+
+.ant-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+

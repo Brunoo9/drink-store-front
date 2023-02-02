@@ -1,0 +1,9 @@
+.ant-layout-sider-trigger{
+    background-color: #262626;
+}
+.ant-menu{
+    background-color: #000 !important;
+}
+.ant-menu-item-selected{
+    background-color: #ef4444!important;
+}

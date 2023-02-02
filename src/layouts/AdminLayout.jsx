@@ -14,7 +14,6 @@ const AdminLayout = () => {
     >
       <MenuSider />
       <Layout className="site-layout">
-        <MenuTop />
         <Content
           style={{
             margin: "0 16px",
