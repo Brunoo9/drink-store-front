@@ -46,7 +46,10 @@ display: block;
     color: blue;
 }
 
-
+.ant-menu-submenu-title{
+    display: flex;
+    align-items: center;
+}
 /*
     -----------HEADER FINISH--------
 */

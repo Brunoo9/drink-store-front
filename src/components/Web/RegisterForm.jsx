@@ -2,15 +2,24 @@
 import { Link } from "react-router-dom";
 
 /* ant design  */
-import {
-  LockOutlined,
-  UserOutlined,
-  MailOutlined,
-  MailFilled,
-} from "@ant-design/icons";
-import { Button, Alert, Form, Input } from "antd";
+import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
+import { Button, Form, Input } from "antd";
+import clienteAxios from "../../config/clienteAxios";
 
 const RegisterForm = () => {
+  // TODO: HACER LO DE LAS ALERTAS ACA
+  const onFinish = (values) => {
+    const userRegister = async () => {
+      try {
+        const { data } = await clienteAxios.post("/users/create", values);
+        console.log(data.msg);
+      } catch (error) {
+        console.log(error.response.data.msg);
+      }
+    };
+    userRegister();
+  };
+
   return (
     <Form
       name="normal_login"
@@ -19,7 +28,7 @@ const RegisterForm = () => {
         remember: true,
       }}
       size="large"
-      // onFinish={onFinish}
+      onFinish={onFinish}
     >
       <Form.Item
         name="email"
@@ -39,7 +48,7 @@ const RegisterForm = () => {
       </Form.Item>
 
       <Form.Item
-        name="username"
+        name="nombreusuario"
         rules={[
           { required: true, message: "El nombre de usuario es requerido" },
           {

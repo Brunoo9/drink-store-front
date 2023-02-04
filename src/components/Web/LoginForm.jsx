@@ -1,11 +1,28 @@
 /* react-router-dom */
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 /* ant design  */
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Alert, Form, Input, Divider } from "antd";
+import { LockOutlined, MailOutlined } from "@ant-design/icons";
+import { Button, Alert, Form, Input } from "antd";
+import clienteAxios from "../../config/clienteAxios";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+  const onFinish = (values) => {
+    const userLogin = async () => {
+      try {
+        const { data } = await clienteAxios.post("/users/login", values);
+
+        localStorage.setItem("token", data.jwt);
+        console.log(data);
+        navigate("/admin");
+      } catch (error) {
+        console.log(error.response.data.msg);
+      }
+    };
+
+    userLogin();
+  };
   return (
     <Form
       name="normal_login"
@@ -14,21 +31,21 @@ const LoginForm = () => {
         remember: true,
       }}
       size="large"
-      // onFinish={onFinish}
+      onFinish={onFinish}
     >
       <Form.Item
-        name="username"
+        name="email"
         rules={[
-          { required: true, message: "El nombre de usuario es requerido" },
+          { required: true, message: "El email es requerido" },
           {
-            min: 3,
-            message: "El nombre de usuario debe tener minimo 3 caracteres",
+            type: "email",
+            message: "No es un email válido",
           },
         ]}
       >
         <Input
-          prefix={<UserOutlined className="site-form-item-icon" />}
-          placeholder="Nombre de usuario"
+          prefix={<MailOutlined className="site-form-item-icon" />}
+          placeholder="Correo electrónico"
           className="rounded-md"
         />
       </Form.Item>

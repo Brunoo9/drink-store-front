@@ -1,15 +1,24 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Button, Badge, Drawer } from "antd";
-import { ShoppingCartOutlined, MenuOutlined } from "@ant-design/icons";
+import { Button, Badge, Dropdown, Drawer, Space, Menu } from "antd";
+import {
+  ShoppingCartOutlined,
+  MenuOutlined,
+  LockOutlined,
+  UserOutlined,
+  PoweroffOutlined,
+  CaretDownOutlined,
+} from "@ant-design/icons";
 import "./webComponents.css";
 import logo from "../../assets/logo.png";
 import letraLogo from "../../assets/letraLogo.svg";
 import useCarrito from "../../Hooks/useCarrito";
 import Cart from "./Cart";
+import useAuth from "../../Hooks/useAuth";
+
 const Header = () => {
   const navigate = useNavigate();
-
+  const { auth } = useAuth();
   const [openCarrito, setOpenCarrito] = useState(false);
 
   const [openMenu, setOpenMenu] = useState(false);
@@ -19,12 +28,14 @@ const Header = () => {
   const onClose = () => {
     setOpenMenu(false);
   };
+
   const onClickCarrito = () => {
     if (openMenu) {
       setOpenMenu(false);
     }
     setOpenCarrito(true);
   };
+
   const onClick = (e) => {
     navigate("/login");
     if (openMenu) {
@@ -64,7 +75,44 @@ const Header = () => {
       url: "productos/combos",
     },
   ];
-
+  const items = [
+    {
+      key: "1",
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.antgroup.com"
+        >
+          1st menu item
+        </a>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.aliyun.com"
+        >
+          2nd menu item
+        </a>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.luohanacademy.com"
+        >
+          3rd menu item
+        </a>
+      ),
+    },
+  ];
   return (
     <header>
       <nav className="h-20 bg-black flex items-center justify-between">
@@ -80,12 +128,23 @@ const Header = () => {
 
         <div className="botones">
           <div className="carrito-botones">
-            <Button
-              className={`hidden md:flex md:items-center border-px border-red-500 text-white hover:bg-red-500 hover:text-white hover:border-red-500 focus:bg-red-500 focus:text-white focus:border-red-500 mr-10`}
-              onClick={onClick}
-            >
-              Iniciar Sesión
-            </Button>
+            {auth?.idusuario ? (
+              <Dropdown
+                menu={{
+                  items,
+                }}
+                placement="bottom"
+              >
+                <Button>bottom</Button>
+              </Dropdown>
+            ) : (
+              <Button
+                className={`hidden md:flex md:items-center border-px border-red-500 text-white hover:bg-red-500 hover:text-white hover:border-red-500 focus:bg-red-500 focus:text-white focus:border-red-500 mr-10`}
+                onClick={onClick}
+              >
+                Iniciar Sesión
+              </Button>
+            )}
           </div>
         </div>
         <Button
@@ -98,7 +157,7 @@ const Header = () => {
       </nav>
 
       <nav
-        className={`hidden md:flex  bg-neutral-800 text-base font-medium   h-12`}
+        className={`hidden md:flex  bg-neutral-800 text-base font-medium  h-12`}
       >
         <div className="flex   gap-4 w-full items-center justify-center text-white">
           {menu.map((m) => (
