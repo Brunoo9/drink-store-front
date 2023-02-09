@@ -6,9 +6,15 @@ import { Link } from "react-router-dom";
 import Logo from "../../assets/logo.png";
 import "./adminComponent.css";
 const MenuSider = () => {
-  const { Sider } = Layout;
   const [collapsed, setCollapsed] = useState(false);
 
+  const { Sider } = Layout;
+
+  const onClick = () => {
+    localStorage.removeItem("token");
+    window.location.reload(true);
+    //todo: alerta de deslogueo aca
+  };
   function getItem(label, key, icon, children) {
     return {
       key,
@@ -20,11 +26,11 @@ const MenuSider = () => {
 
   const items = [
     getItem(
-      <Link className="itemSider" to="">
-        Home
+      <Link className="itemSider" to="/admin">
+        Reportes
       </Link>,
       "1",
-      <Icon icon="carbon:home" />
+      <Icon icon="carbon:text-link-analysis" />
     ),
     getItem("Productos", "2", <Icon icon="fluent-mdl2:product-variant" />, [
       getItem(
@@ -42,9 +48,16 @@ const MenuSider = () => {
     ]),
     getItem(
       <Link className="itemSider" to="/">
-        Cerrar Sesión
+        Ir a la tienda
       </Link>,
       "5",
+      <Icon icon="mdi:shop" />
+    ),
+    getItem(
+      <Link className="itemSider" to="/" onClick={onClick}>
+        Cerrar Sesión
+      </Link>,
+      "6",
       <Icon icon="mdi:power-standby" />
     ),
     // getItem(

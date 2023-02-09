@@ -1,29 +1,19 @@
-import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Button, Badge, Dropdown, Drawer, Space, Menu } from "antd";
-import {
-  ShoppingCartOutlined,
-  MenuOutlined,
-  LockOutlined,
-  UserOutlined,
-  PoweroffOutlined,
-  CaretDownOutlined,
-} from "@ant-design/icons";
-import "./webComponents.css";
-import logo from "../../assets/logo.png";
-import letraLogo from "../../assets/letraLogo.svg";
-import useCarrito from "../../Hooks/useCarrito";
-import Cart from "./Cart";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Drawer } from "antd";
+import { ShoppingCartOutlined, MenuOutlined } from "@ant-design/icons";
 import useAuth from "../../Hooks/useAuth";
+import Cart from "./Cart";
+import DropdownCustom from "./DropdownCustom";
+import letraLogo from "../../assets/letraLogo.svg";
+import logo from "../../assets/logo.png";
+import "./webComponents.css";
 
 const Header = () => {
-  const navigate = useNavigate();
-  const { auth } = useAuth();
   const [openCarrito, setOpenCarrito] = useState(false);
-
   const [openMenu, setOpenMenu] = useState(false);
-
-  const { cartItems } = useCarrito();
+  const { auth } = useAuth();
+  const navigate = useNavigate();
 
   const onClose = () => {
     setOpenMenu(false);
@@ -36,7 +26,7 @@ const Header = () => {
     setOpenCarrito(true);
   };
 
-  const onClick = (e) => {
+  const onClick = () => {
     navigate("/login");
     if (openMenu) {
       setOpenMenu(false);
@@ -75,44 +65,7 @@ const Header = () => {
       url: "productos/combos",
     },
   ];
-  const items = [
-    {
-      key: "1",
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.antgroup.com"
-        >
-          1st menu item
-        </a>
-      ),
-    },
-    {
-      key: "2",
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.aliyun.com"
-        >
-          2nd menu item
-        </a>
-      ),
-    },
-    {
-      key: "3",
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.luohanacademy.com"
-        >
-          3rd menu item
-        </a>
-      ),
-    },
-  ];
+
   return (
     <header>
       <nav className="h-20 bg-black flex items-center justify-between">
@@ -129,17 +82,10 @@ const Header = () => {
         <div className="botones">
           <div className="carrito-botones">
             {auth?.idusuario ? (
-              <Dropdown
-                menu={{
-                  items,
-                }}
-                placement="bottom"
-              >
-                <Button>bottom</Button>
-              </Dropdown>
+              <DropdownCustom visible="invisible md:visible" />
             ) : (
               <Button
-                className={`hidden md:flex md:items-center border-px border-red-500 text-white hover:bg-red-500 hover:text-white hover:border-red-500 focus:bg-red-500 focus:text-white focus:border-red-500 mr-10`}
+                className={`invisible md:visible  border-px border-red-500 text-white hover:bg-red-500 hover:text-white hover:border-red-500 focus:bg-red-500 focus:text-white focus:border-red-500 mr-10`}
                 onClick={onClick}
               >
                 Iniciar Sesión
@@ -194,7 +140,7 @@ const Header = () => {
             {menu.map((m) => (
               <Link
                 to={m.url}
-                className=" hover:text-red-500 border-b border-transparent hover:border-white"
+                className="hover:text-red-500 border-b border-transparent hover:border-white"
                 key={m.key}
                 onClick={() => setOpenMenu(false)} // que se cierre cuando apreto alguna de esas opciones
               >
@@ -211,12 +157,16 @@ const Header = () => {
               </Button>
             </div>
             <div className="carrito-botones">
-              <Button
-                className={`flex items-center font-mono border-px border-red-500 text-white hover:bg-red-500 hover:text-white hover:border-red-500 focus:bg-red-500 focus:text-white focus:border-red-500`}
-                onClick={onClick}
-              >
-                Iniciar Sesión
-              </Button>
+              {auth?.idusuario ? (
+                <DropdownCustom visible="" />
+              ) : (
+                <Button
+                  className={`flex items-center font-mono border-px border-red-500 text-white hover:bg-red-500 hover:text-white hover:border-red-500 focus:bg-red-500 focus:text-white focus:border-red-500`}
+                  onClick={onClick}
+                >
+                  Iniciar Sesión
+                </Button>
+              )}
             </div>
           </div>
         </nav>

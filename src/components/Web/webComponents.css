@@ -50,6 +50,27 @@ display: block;
     display: flex;
     align-items: center;
 }
+
+.btn-user:hover{
+    background-color: transparent;
+    color: #ef4444;
+}
+.btn-user:focus{
+    background-color: transparent;
+    color:#fff;
+}
+.ant-dropdown-menu{
+    background-color: #171717;
+}
+
+.ant-dropdown-menu p{
+    
+    color: #fff;
+}
+.ant-dropdown-menu p:hover{
+    
+    color: #000;
+}
 /*
     -----------HEADER FINISH--------
 */

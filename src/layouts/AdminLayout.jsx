@@ -6,11 +6,11 @@ import MenuTop from "../components/Admin/MenuTop";
 import useAuth from "../Hooks/useAuth";
 const AdminLayout = () => {
   const { auth, loading } = useAuth();
-  const { Header, Content, Footer, Sider } = Layout;
+  const { Content } = Layout;
   if (loading) return "cargando..";
   return (
     <>
-      {auth?.idusuario ? (
+      {auth?.idusuario && auth?.rol?.nombrerol === "ADMIN" ? (
         <Layout
           style={{
             minHeight: "100vh",
@@ -25,13 +25,6 @@ const AdminLayout = () => {
             >
               <Outlet />
             </Content>
-            <Footer
-              style={{
-                textAlign: "center",
-              }}
-            >
-              Ant Design ©2018 Created by Ant UED
-            </Footer>
           </Layout>
         </Layout>
       ) : (

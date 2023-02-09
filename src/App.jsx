@@ -1,14 +1,17 @@
-import "antd/dist/antd.css";
 import { BrowserRouter } from "react-router-dom";
-import { CarritoProvider } from "./Context/CarritoProvider";
 import WebRoutes from "./routes/WebRoutes";
+import { CarritoProvider } from "./Context/CarritoProvider";
 import { AuthProvider } from "./Context/AuthProvider";
+import { AlertProvider } from "./Context/AlertProvider";
+import "antd/dist/antd.css";
 const App = () => (
   <BrowserRouter>
     <AuthProvider>
-      <CarritoProvider>
-        <WebRoutes />
-      </CarritoProvider>
+      <AlertProvider>
+        <CarritoProvider>
+          <WebRoutes />
+        </CarritoProvider>
+      </AlertProvider>
     </AuthProvider>
   </BrowserRouter>
 );
