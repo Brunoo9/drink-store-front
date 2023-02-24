@@ -2,18 +2,22 @@ import { Dropdown, Button } from "antd";
 import { CaretDownOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
-
+import useAlert from "../../Hooks/useAlert";
 const DropdownCustom = ({ visible }) => {
+  const { openSuccess } = useAlert();
   const { auth } = useAuth();
   const navigate = useNavigate();
+
   const onClickPanel = () => {
     navigate("/admin");
   };
   const onClick = () => {
-    localStorage.removeItem("token");
-    window.location.reload(true);
-    navigate("/");
-    //TODO: AGREGAR ALERTA DE QUE SE DESLOGUEO CORRECTAMENTE
+    openSuccess("Se cerró sesión correctamente!");
+
+    setTimeout(() => {
+      window.location.reload(true);
+      localStorage.removeItem("token");
+    }, 600);
   };
 
   const items = [
@@ -38,7 +42,7 @@ const DropdownCustom = ({ visible }) => {
       placement="bottom"
       className={`${visible}`}
     >
-      <Button className=" border-none text-white btn-user">
+      <Button className="border-none text-white btn-user">
         Hola, {auth?.nombreusuario}
         <CaretDownOutlined />
       </Button>

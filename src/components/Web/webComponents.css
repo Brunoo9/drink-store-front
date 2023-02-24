@@ -2,13 +2,13 @@
     -----------HEADER START--------
 */
 .ant-drawer-close{
-    color: #fff;
+    color: #fff !important;
 }
 .ant-drawer-title{
-    color: #fff;
+    color: #fff !important;
 }
 .ant-drawer-close:hover{
-    color: #ef4444;
+    color: #ef4444!important;
 }
 .carrito-contenedor{
     display: flex;
@@ -52,24 +52,24 @@ display: block;
 }
 
 .btn-user:hover{
-    background-color: transparent;
-    color: #ef4444;
+    background-color: transparent !important;
+    color: #ef4444 !important;
 }
 .btn-user:focus{
-    background-color: transparent;
-    color:#fff;
+    background-color: transparent!important;
+    color:#fff !important;
 }
 .ant-dropdown-menu{
-    background-color: #171717;
+    background-color: #171717 !important;
 }
 
 .ant-dropdown-menu p{
     
-    color: #fff;
+    color: #fff !important;
 }
 .ant-dropdown-menu p:hover{
     
-    color: #000;
+    color: #000!important;
 }
 /*
     -----------HEADER FINISH--------

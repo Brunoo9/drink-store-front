@@ -4,16 +4,19 @@ import { useState } from "react";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/logo.png";
+import useAlert from "../../Hooks/useAlert";
 import "./adminComponent.css";
 const MenuSider = () => {
   const [collapsed, setCollapsed] = useState(false);
-
+  const { openSuccess } = useAlert();
   const { Sider } = Layout;
 
   const onClick = () => {
-    localStorage.removeItem("token");
-    window.location.reload(true);
-    //todo: alerta de deslogueo aca
+    openSuccess("Se cerró sesión correctamente!");
+    setTimeout(() => {
+      localStorage.removeItem("token");
+      window.location.reload(true);
+    }, 600);
   };
   function getItem(label, key, icon, children) {
     return {
@@ -25,13 +28,13 @@ const MenuSider = () => {
   }
 
   const items = [
-    getItem(
-      <Link className="itemSider" to="/admin">
-        Reportes
-      </Link>,
-      "1",
-      <Icon icon="carbon:text-link-analysis" />
-    ),
+    // getItem(
+    //   <Link className="itemSider" to="/admin">
+    //     Reportes
+    //   </Link>,
+    //   "1",
+    //   <Icon icon="carbon:text-link-analysis" />
+    // ),
     getItem("Productos", "2", <Icon icon="fluent-mdl2:product-variant" />, [
       getItem(
         <Link className="itemSider" to="productos">
@@ -54,7 +57,7 @@ const MenuSider = () => {
       <Icon icon="mdi:shop" />
     ),
     getItem(
-      <Link className="itemSider" to="/" onClick={onClick}>
+      <Link className="itemSider" onClick={onClick}>
         Cerrar Sesión
       </Link>,
       "6",
@@ -91,7 +94,14 @@ const MenuSider = () => {
       className="bg-black"
     >
       <div className="flex justify-center">
-        <Image src={Logo} alt="logo drink store" preview={false} height={80} />
+        <Link to="/admin">
+          <Image
+            src={Logo}
+            alt="logo drink store"
+            preview={false}
+            height={80}
+          />
+        </Link>
       </div>
       <Menu
         theme="dark"

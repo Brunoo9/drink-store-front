@@ -1,11 +1,7 @@
 import React from "react";
-
+import "../pages.css";
 const AdminHome = () => {
-  return (
-    <div>
-      <div>Homeee</div>
-    </div>
-  );
+  return <div className="div-admin"></div>;
 };
 
 export default AdminHome;

@@ -1,7 +1,7 @@
 import ArticuloCarrito from "./ArticuloCarrito";
 import { Button, Drawer, message } from "antd";
 import useCarrito from "../../Hooks/useCarrito";
-
+import "./webComponents.css";
 const Cart = ({ openCarrito, setOpenCarrito }) => {
   const { clearCart, cartItems, subTotal } = useCarrito();
 

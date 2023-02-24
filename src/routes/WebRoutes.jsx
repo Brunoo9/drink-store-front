@@ -28,7 +28,7 @@ import WebRubia from "../pages/Web/drinkPages/Cervezas/WebRubia";
 import WebRoja from "../pages/Web/drinkPages/Cervezas/WebRoja";
 import WebVinosBlacno from "../pages/Web/drinkPages/vinos/WebVinosBlacno";
 import WebVinosEspumoso from "../pages/Web/drinkPages/vinos/WebVinosEspumoso";
-
+import WebProduct from "../pages/Web/WebProduct";
 const WebRoutes = () => {
   return (
     <Routes>
@@ -38,6 +38,7 @@ const WebRoutes = () => {
         <Route path="register" element={<WebRegister />} />
 
         <Route path="productos/espirituosas" element={<WebEspirituosas />} />
+        <Route path="productos/:id" element={<WebProduct />} />
         <Route
           path="productos/espirituosas/whiskies"
           element={<WebWhiskies />}

@@ -41,6 +41,21 @@
 /*
     -----------ADMIN USERS FINISH--------
 */
+/*
+    -----------ADMIN HOME START--------
+*/
+
+.div-admin{
+    content: '';
+    background-image: url("../assets/DrinkStore.png");
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position:center center;
+}
+/*
+    -----------ADMIN HOME FINISH--------
+*/
 
 
 

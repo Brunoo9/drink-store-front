@@ -6,20 +6,21 @@ import {
   InputNumber,
   Select,
   Upload,
-  Space,
   message,
 } from "antd";
 
 import { useState, useEffect } from "react";
 
 import clienteAxios from "../../../config/clienteAxios";
+import "../adminComponent.css";
 
 const FormProductUp = () => {
-  const { TextArea } = Input;
   const [fileList, setFileList] = useState([]); // state del upload
   const [categories, setCategories] = useState([]); // representa las categorias de la bd
   const [subCategories, setSubCategories] = useState([]); // representa las subcategorias de la bd
   const [disable, setDisable] = useState(true); // para desactivar/activar el select subcategorias
+  const [form] = Form.useForm();
+  const { TextArea } = Input;
 
   useEffect(() => {
     const getCategories = async () => {
@@ -33,8 +34,17 @@ const FormProductUp = () => {
     getCategories();
   }, []);
 
-  const [form] = Form.useForm();
-
+  const getSub = async (idcategoria) => {
+    try {
+      const { data } = await clienteAxios.post("categories/getallsub", {
+        idcategoria,
+      });
+      console.log(data);
+      setSubCategories(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const onFinish = (values) => {
     const { imagenes } = values;
     if (imagenes.fileList.length <= 0) {
@@ -44,9 +54,11 @@ const FormProductUp = () => {
     const createProducts = async () => {
       let formData = new FormData();
       Object.keys(values).forEach((key) => {
+        // agrego todo al formdata
         formData.append(key, values[key]);
       });
-      formData.append("imagenes", imagenes.file);
+
+      formData.append("img", imagenes.file);
 
       try {
         const { data } = await clienteAxios.post("products/create", formData, {
@@ -66,25 +78,27 @@ const FormProductUp = () => {
     createProducts();
   };
 
-  const handleChange = async (value) => {
+  const handleChange = async (idcategoria) => {
     form.setFieldsValue({
       idsubcategoria: "",
-    });
-    if (disable) {
-      setDisable(false);
-    }
-    try {
-      const { data } = await clienteAxios.post("categories/getallsub", {
-        idcategoria: value,
-      });
-      setSubCategories(data);
-    } catch (error) {
-      console.log(error);
-    }
+    }); // para reiniciar el select cada vez que cambio la categoria
+
+    if (disable) setDisable(false);
+
+    getSub(idcategoria);
   };
 
   const props = {
     beforeUpload: (file) => {
+      const isJpgOrPng =
+        file.type === "image/jpeg" || file.type === "image/png";
+
+      if (!isJpgOrPng)
+        return message.error("Solo se acepta imagenes en formato JPG/PNG!");
+
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isLt2M) return message.error("La imágen no puede superar los 2MB!");
+
       setFileList([...fileList, file]);
       return false; // retorno false para que no se suba de una la imagen
       // para que se suba cunando haga la consulta a la bd en el onFinish
@@ -96,13 +110,17 @@ const FormProductUp = () => {
       setFileList(newFileList);
     },
     onChange: ({ fileList: newFileList, file }) => {
+      const isJpgOrPng =
+        file.type === "image/jpeg" || file.type === "image/png";
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isJpgOrPng || !isLt2M) return false; // para que no los ponga en la filelist cuando no son png o jpg
+      // o cuando se pasan de del tamaño
       setFileList(newFileList);
     },
-    maxCount: 3,
-    accept: ".jpg",
+    maxCount: 1,
+    accept: ".jpg,.png",
     listType: "picture-card",
   };
-  // const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
 
   const categoryData = categories.map((cat) => ({
     value: cat.idcategoria,
@@ -198,21 +216,9 @@ const FormProductUp = () => {
         <InputNumber addonBefore="$" addonAfter="ARS" />
       </Form.Item>
 
-      <Form.Item
-        label="Imagenes"
-        name="imagenes"
-        rules={[{ required: true, message: "Debe colocar almenos 1 imágen" }]}
-        required={false}
-      >
-        <Upload
-          // listType="picture-card"
-
-          fileList={fileList}
-          // maxCount={3}
-          // accept=".jpg"
-          {...props}
-        >
-          {fileList.length >= 3 ? null : (
+      <Form.Item label="Imágen" name="imagenes">
+        <Upload fileList={fileList} {...props}>
+          {fileList.length >= 1 ? null : (
             <div>
               <PlusOutlined />
               <div
@@ -228,7 +234,10 @@ const FormProductUp = () => {
       </Form.Item>
 
       <Form.Item>
-        <Button type="primary" htmlType="submit" className="form-button">
+        <Button
+          htmlType="submit"
+          className="text-white p-4 w-full bg-red-700 hover:bg-red-800 hover:text-white focus:text-white focus:bg-red-700 "
+        >
           Crear producto
         </Button>
       </Form.Item>

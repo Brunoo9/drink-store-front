@@ -3,21 +3,22 @@ import {
   DeleteOutlined,
   EyeOutlined,
   ExclamationCircleOutlined,
-  FileTextOutlined,
 } from "@ant-design/icons";
-import { Avatar, Button, List, Tooltip, Modal, Table, Space } from "antd";
+import { Button, Tooltip, Modal, Table, Space } from "antd";
 import { useEffect, useState } from "react";
+import useAlert from "../../../Hooks/useAlert";
 import clienteAxios from "../../../config/clienteAxios";
 import ProductView from "./ProductView";
 import ProductEdit from "./ProductEdit";
-
+import "../adminComponent.css";
 const ProductList = () => {
+  const { openSuccess } = useAlert();
   const [fillProducts, setFillProducts] = useState([]);
   const [product, setProduct] = useState({}); // producto que selecicono en la lista
-  const { confirm } = Modal;
-
   const [modalViewOpen, setModalViewOpen] = useState(false);
   const [modalEditOpen, setModalEditOpen] = useState(false);
+
+  const { confirm } = Modal;
 
   useEffect(() => {
     const getProducts = async () => {
@@ -47,10 +48,21 @@ const ProductList = () => {
     confirm({
       title: "Está seguro que desea eliminar este producto?",
       icon: <ExclamationCircleOutlined />,
+      okText: "Eliminar",
+      cancelText: "Cancelar",
       async onOk() {
-        // Eliminar el paciente
+        // Eliminar el producto
+
         try {
-          // await clienteAxios.put(`/pacients/delete/${record.key}`);
+          const { data } = await clienteAxios.delete(
+            `/products/delete/${item.key}`
+          );
+          const updateList = fillProducts.filter(
+            (product) => product.key !== item.key
+          );
+          console.log(updateList);
+          openSuccess(data.msg);
+          setFillProducts(updateList);
         } catch (error) {
           console.log(error);
         }
@@ -122,24 +134,9 @@ const ProductList = () => {
     },
   ];
 
-  const data = fillProducts.map((product) => ({
-    key: product.idproducto,
-    nombreproducto: product.nombreproducto,
-    descripcion: product.descripcion,
-    precio: product.precio,
-    img1: product.img1,
-    img2: product?.img2,
-    img3: product?.img3,
-    codproducto: product.codproducto,
-    idcategoria: product.categoria.idcategoria,
-    nombrecategoria: product.categoria.nombrecategoria,
-    idsubcategoria: product.subcategoria.idsubcategoria,
-    nombresub: product.subcategoria.nombresub,
-  }));
-
   return (
     <>
-      <Table columns={columns} dataSource={data} />
+      <Table columns={columns} dataSource={fillProducts} />
       <ProductView
         modalViewOpen={modalViewOpen}
         setModalViewOpen={setModalViewOpen}
