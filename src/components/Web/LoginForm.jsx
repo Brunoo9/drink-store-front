@@ -1,24 +1,27 @@
-/* react-router-dom */
 import { Link, useNavigate, Navigate } from "react-router-dom";
 
-/* ant design  */
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
-import { Button, Alert, Form, Input } from "antd";
+import { Button, Form, Input } from "antd";
+
 import clienteAxios from "../../config/clienteAxios";
 import useAuth from "../../Hooks/useAuth";
+import useAlert from "../../Hooks/useAlert";
+
 const LoginForm = () => {
-  const navigate = useNavigate();
   const { auth } = useAuth();
+
+  const { openError } = useAlert();
+  const navigate = useNavigate();
+
   const onFinish = (values) => {
     const userLogin = async () => {
       try {
         const { data } = await clienteAxios.post("/users/login", values);
-
         localStorage.setItem("token", data.jwt);
         navigate("/");
         window.location.reload(true);
       } catch (error) {
-        console.log(error.response.data.msg);
+        openError(error.response.data.msg);
       }
     };
 
@@ -74,7 +77,6 @@ const LoginForm = () => {
           Olvidé la contraseña
       </Link> */}
           </Form.Item>
-          <Alert message="Admin: Admin, Password: adminpw" type="info" />
           <Form.Item>
             <Button
               type="primary"

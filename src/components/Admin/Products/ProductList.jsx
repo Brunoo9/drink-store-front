@@ -11,6 +11,7 @@ import clienteAxios from "../../../config/clienteAxios";
 import ProductView from "./ProductView";
 import ProductEdit from "./ProductEdit";
 import "../adminComponent.css";
+
 const ProductList = () => {
   const { openSuccess } = useAlert();
   const [fillProducts, setFillProducts] = useState([]);

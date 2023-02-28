@@ -8,8 +8,8 @@ const ArticuloCarrito = () => {
 
   return cartItems?.length > 0 ? (
     cartItems.map((item) => (
-      <div key={item.idproducto}>
-        <div className="articulo " key={item.idproducto}>
+      <div key={item.key}>
+        <div className="articulo">
           <div className="articulo-img">
             <img src={item.img1} alt="" />
           </div>

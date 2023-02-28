@@ -17,6 +17,7 @@ const DropdownCustom = ({ visible }) => {
     setTimeout(() => {
       window.location.reload(true);
       localStorage.removeItem("token");
+      localStorage.removeItem("carrito");
     }, 600);
   };
 

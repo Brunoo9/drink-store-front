@@ -37,7 +37,7 @@ const ProductsList = ({ products }) => {
                 <Link
                   className=" flex justify-center gap-2 items-center p-2 h-full border-none  rounded-sm hover:bg-transparent hover:text-red-500  focus:bg-transparent focus:text-red-500 w-full transition duration-800"
                   icon={<EyeOutlined />}
-                  to={`productos/${product.key}`}
+                  to={`/productos/${product.key}`}
                 >
                   <EyeOutlined />
                   Ver

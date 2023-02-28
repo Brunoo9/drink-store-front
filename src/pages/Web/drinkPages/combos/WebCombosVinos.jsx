@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import MasterProductsPage from "../MasterProductsPage";
+import MasterProductsPage from "../../../../components/Web/MasterProductsPage";
 import clienteAxios from "../../../../config/clienteAxios";
 
 const WebCombosVinos = () => {

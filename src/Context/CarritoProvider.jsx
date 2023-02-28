@@ -30,9 +30,7 @@ const CarritoProvider = ({ children }) => {
   }, [cartItems]);
 
   const addItemToCart = (product) => {
-    const inCart = cartItems.find(
-      (item) => item?.idproducto === product?.idproducto
-    );
+    const inCart = cartItems.find((item) => item?.key === product?.key);
     if (!inCart) {
       const cartNew = [
         ...cartItems,
@@ -43,7 +41,7 @@ const CarritoProvider = ({ children }) => {
       return;
     }
     const newCart = cartItems.map((item) => {
-      if (item?.idproducto === product?.idproducto) {
+      if (item?.key === product?.key) {
         return {
           ...inCart,
           cantidad: inCart.cantidad + 1,
@@ -70,9 +68,7 @@ const CarritoProvider = ({ children }) => {
     // );
     // setCartItems(newCart);
 
-    const newCart = cartItems.filter(
-      (item) => item.idproducto !== product.idproducto
-    );
+    const newCart = cartItems.filter((item) => item.key !== product.key);
     setCartItems(newCart);
     updateSubTotal(newCart);
   };

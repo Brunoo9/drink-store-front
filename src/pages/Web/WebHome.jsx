@@ -3,7 +3,7 @@ import clienteAxios from "../../config/clienteAxios";
 
 import "../pages.css";
 
-import MasterProductsPage from "./drinkPages/MasterProductsPage";
+import MasterProductsPage from "../../components/Web/MasterProductsPage";
 
 const WebHome = () => {
   const [products, setProducts] = useState([]);

@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Button, Drawer } from "antd";
 import { FilterFilled } from "@ant-design/icons";
 
-import ProductsList from "../ProductsList";
-import FilterList from "../FilterList";
+import ProductsList from "./ProductsList";
+import FilterList from "./FilterList";
 
 const MasterProductsPage = ({ filters, products, title }) => {
   const [openFilter, setOpenFilter] = useState(false);

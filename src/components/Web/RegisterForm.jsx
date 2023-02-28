@@ -1,20 +1,22 @@
-/* react-router-dom */
 import { Link } from "react-router-dom";
 
-/* ant design  */
 import { LockOutlined, UserOutlined, MailOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
+
 import clienteAxios from "../../config/clienteAxios";
+import useAlert from "../../Hooks/useAlert";
 
 const RegisterForm = () => {
-  // TODO: HACER LO DE LAS ALERTAS ACA
+  const { openSucces, openError } = useAlert();
+
   const onFinish = (values) => {
     const userRegister = async () => {
       try {
         const { data } = await clienteAxios.post("/users/create", values);
-        console.log(data.msg);
+
+        openSucces(data.msg);
       } catch (error) {
-        console.log(error.response.data.msg);
+        openError(error.response.data.msg);
       }
     };
     userRegister();
@@ -107,7 +109,7 @@ const RegisterForm = () => {
           htmlType="submit"
           className="w-full border-red-500 bg-red-500 uppercase hover:bg-red-400 hover:border-red-400 rounded-md mt-4"
         >
-          Crear
+          Registrarse
         </Button>
       </Form.Item>
       <div className="w-full flex items-center justify-center gap-1 mb-2">

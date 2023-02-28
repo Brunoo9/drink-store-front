@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import clienteAxios from "../../../../config/clienteAxios";
-import MasterProductsPage from "../MasterProductsPage";
+import MasterProductsPage from "../../../../components/Web/MasterProductsPage";
 
 const WebVinosTinto = () => {
   const [wines, setWines] = useState([]);
